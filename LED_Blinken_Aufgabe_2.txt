@@ -1,0 +1,31 @@
+#include <avr/io.h>
+#include <util/delay.h>
+#define F_CPU 16000000UL
+
+
+int main(void){
+
+   DDRB=63; // konfiguration PB0,PB1,PB2,PB3,PB4,PB5 Als Ausgang
+               // 0b0011_1111;
+  
+  
+    while(1) {
+    
+      for(int i =64; i>=2 ;i=(i/2)){
+        if(i%2==0){
+           PORTB|=(i>>1); // Bit setzen
+          _delay_ms(200);
+          PORTB&=~(i>>1);  // Bit Loeschen   
+        }
+      }
+    
+      for(int j=0; j<5 ;j++){
+      
+        PORTB|=(1<<j); // Bit Setzen
+          _delay_ms(200);
+        PORTB&=~(1<<j); // Bit Loeschen 
+    
+      
+      }  
+   }
+}
